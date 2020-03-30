@@ -1,8 +1,6 @@
 # Refgenie plugin
 
-This Python package is a demo refgenie plugin. 
-
-Refgenie plugins are Python packages that provide functions that are configured to run during specific refgenie actions.
+This is a demo refgenie plugin. Refgenie plugins are Python packages that provide functions that are configured to run during specific refgenie actions.
 
 ## Hooks
 
@@ -17,6 +15,8 @@ A refgenie plugin has 3 requirements:
 
 ## 1. Add entry_points to setup.py
 
+The [setup.py](setup.py) file uses `entry_points` to specify a mapping of refgenie hooks to functions to call.
+
 ```
     entry_points={
         'refgenie.hooks.post_update': 'myplugin=refgenie_myplugin:my_post_update_func',
@@ -24,9 +24,14 @@ A refgenie plugin has 3 requirements:
         }
 ```
 
-The format is: `'refgenie.hooks.HOOK': 'PLUGIN_NAME=PLUGIN_MODULE_NAME:FUNCTION_NAME'`
+The format is: `'refgenie.hooks.HOOK': 'PLUGIN_NAME=PLUGIN_PACKAGE_NAME:FUNCTION_NAME'`.
 
-## 2. Write the functions
+- "HOOK" must be one of the list provided above.
+- "PLUGIN_NAME" can be any unique identifier for your plugin
+- "PLUGIN_PACKAGE_NAME" must be the name of python package the holds your plugin.
+- "FUNCTION_NAME" must match the name of the function in your package
+
+## 2. Write functions to call
 
 The module [refgenie_myplugin/refgenie_myplugin.py](refgenie_myplugin/refgenie_myplugin.py) contains the functions, with names corresponding to the `FUNCTION_NAME` in the entry points above. These functions **must take a RefGenConf object as sole parameter**.
 
