@@ -1,0 +1,28 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "refgenie_myplugin"
+version = "0.1.0"
+description = "A template refgenie plugin"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "BSD-2-Clause"
+authors = [{ name = "Nathan Sheffield" }]
+dependencies = ["refgenie>=1.0.0a1"]
+
+[project.entry-points."refgenie.hooks.post_update"]
+myplugin = "refgenie_myplugin:my_post_update_func"
+
+[project.entry-points."refgenie.hooks.pre_pull"]
+myplugin = "refgenie_myplugin:my_pre_pull_func"
+
+[project.entry-points."refgenie.hooks.post_build"]
+myplugin = "refgenie_myplugin:my_post_build_func"
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
